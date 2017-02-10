@@ -8,7 +8,6 @@ export function signUp (email, phone) {
 	})
 	.then((resp) => {
 		console.log("signed up")
-		// browserHistory.push("/checkbox")
   })
 }
 
@@ -19,6 +18,6 @@ export function signIn (email, phone) {
 	})
 	.then((resp) => {
 		console.log("logged in")
-		// browserHistory.push("/checkbox")
+		browserHistory.push("/checkbox")
   })
 }

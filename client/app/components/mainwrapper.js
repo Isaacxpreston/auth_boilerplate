@@ -3,8 +3,6 @@ import {Link, browserHistory} from 'react-router'
 import {connect} from 'react-redux'
 import {signUp} from '../actions/actions.js'
 
-import Landing from "./landing.js"
-
 const Main = React.createClass({
 
 	someAction () {
@@ -18,7 +16,7 @@ const Main = React.createClass({
 	render() {
 		return (
 			<div>
-				<h1>aksdfkajsdf</h1>
+				<h1>auth boilerplate</h1>
 				{ React.cloneElement(this.props.children, this.props) }
 			</div>
 		)
@@ -27,7 +25,7 @@ const Main = React.createClass({
 
 function mapStatetoProps (state=[]) {
 	return {
-		iconsReducer: state.iconsReducer,
+		simpleReducer: state.simpleReducer,
 	}
 }
 

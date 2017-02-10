@@ -31,7 +31,7 @@ router.get('/isAuthenticated', isLoggedIn, (req, res) => {
   res.send("authorized");
 });
 
-router.get('/logout', (req, res) => {
+router.get('/signout', (req, res) => {
   req.logout();
   res.end();
 });
