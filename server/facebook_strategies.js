@@ -10,13 +10,6 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-const isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.send('unauthorized');
-};
-
 passport.use(new FacebookStrategy({
   clientID: "208481726293870",
   clientSecret: "53a1d2974ee0af9a9b317460a84d7b3c",
@@ -53,7 +46,4 @@ function(token, refreshToken, profile, done) {
   });
 }));
 
-module.exports = {
-  isLoggedIn,
-  passport
-};
+module.exports = passport

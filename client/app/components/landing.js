@@ -1,12 +1,11 @@
 import React from 'react'
-import {signUp, signIn} from '../utils/signup.js'
-import {checkFacebookAuth, checkLocalAuth} from '../utils/check_auth.js'
+import {signUp, signIn} from '../utils/local_auth.js'
+import {checkAuth} from '../utils/check_auth.js'
 
 const Landing = React.createClass({
 
   componentWillMount () {
-    checkFacebookAuth()
-    checkLocalAuth()
+    checkAuth()
   },
 
   formSignUp (e) {
@@ -41,7 +40,7 @@ const Landing = React.createClass({
           <input type="text" ref="signin_email"></input>
           phone
           <input type="text" ref="signin_phone"></input>
-          <button>sign up</button>
+          <button>sign in</button>
         </form>
 
         <br />

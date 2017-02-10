@@ -12,13 +12,6 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-const isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.send('unauthorized');
-};
-
 //-AUTH
 passport.use('login',
   new LocalStrategy({
@@ -68,7 +61,4 @@ passport.use('signup', new LocalStrategy({
   });
 }));
 
-module.exports = {
-  isLoggedIn: isLoggedIn,
-  passport: passport
-};
+module.exports = passport
