@@ -2,7 +2,6 @@ const passport = require('passport');
 const User = require('../database/user_schema.js')
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-//-SESSIONS
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -24,40 +23,28 @@ passport.use(new FacebookStrategy({
   callbackURL: 'http://localhost:4000/api/facebook/callback'
 },
 
-// facebook will send back the token and profile
 function(token, refreshToken, profile, done) {
-  // asynchronous
   process.nextTick(function() {
     console.log("finding user")
-    // find the user in the database based on their facebook id
     User.find({ 'email' : profile.id }, function(err, user) {
-      // if there is an error, stop everything and return that
-      // ie an error connecting to the database
       if (err) {
         console.log("error finding user")
         return done(err);
       }    
-      // if the user is found, then log them in
       if (user.length > 0) {
-        console.log("user exists", user)
-        return done(null, user); // user found, return that user
+        console.log("user exists, logging in...")
+        return done(null, user);
       } else {
         console.log("user does not exist, creating...")
-        // if there is no user found with that facebook id, create them
-        var temp = new User();
-        // set all of the facebook information in our user model
-        temp.email = profile.id; // set the users facebook id    
-        temp.phone = temp.generateHash("REPLACE");               
-        // temp.facebook.token = token; // we will save the token that facebook provides to the user                    
-        // temp.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
-        // temp.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-        // save our user to the database
+        var temp = new User( {
+          email: profile.id
+        });
+        temp.phone = temp.generateHash(Math.random());
         temp.save(function(err) {
           if (err) {
             console.log("error saving user")
             throw err;
-          }   
-          // if successful, return the new user
+          }
           console.log("user saved")
           return done(null, temp);
         });

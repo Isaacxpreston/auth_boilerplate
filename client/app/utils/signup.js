@@ -7,7 +7,18 @@ export function signUp (email, phone) {
 		phone
 	})
 	.then((resp) => {
+		console.log("signed up")
+		// browserHistory.push("/checkbox")
+  })
+}
+
+export function signIn (email, phone) {
+  return axios.post('/api/signin', {
+		email,
+		phone
+	})
+	.then((resp) => {
 		console.log("logged in")
-		browserHistory.push("/checkbox")
+		// browserHistory.push("/checkbox")
   })
 }

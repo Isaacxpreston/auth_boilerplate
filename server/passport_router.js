@@ -1,7 +1,7 @@
 const local = require('./local_strategies.js');
 const facebook = require('./facebook_strategies.js')
 const express = require('express');
-const router = express.Router();
+const router = express.Router()
 
 router.get('/facebook', facebook.passport.authenticate('facebook', { scope : 'email' }));
 
@@ -13,7 +13,7 @@ router.get('/facebook/callback',
   }
 ));
 
-router.post('/login', local.passport.authenticate('login'), (req, res) => {
+router.post('/signin', local.passport.authenticate('login'), (req, res) => {
   res.end();
 });
 
@@ -21,8 +21,12 @@ router.post('/signup', local.passport.authenticate('signup'), (req, res) => {
   res.end();
 });
 
-router.get('/isAuthenticated', local.isLoggedIn, (req, res) => {
-  res.end();
+router.get('/isLocalAuthenticated', local.isLoggedIn, (req, res) => {
+  res.send("authorized");
+});
+
+router.get('/isFacebookAuthenticated', facebook.isLoggedIn, (req, res) => {
+  res.send("authorized");
 });
 
 router.get('/logout', (req, res) => {

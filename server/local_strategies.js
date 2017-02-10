@@ -49,7 +49,7 @@ passport.use('signup', new LocalStrategy({
   process.nextTick(() => {
     User.find({'email': email}, (err, data) => {
       if (!data.length) {
-        const temp = new User({ //create a new user to store in db
+        const temp = new User({
           email
         });
         temp.phone = temp.generateHash(phone);
